@@ -2,7 +2,7 @@ export class Task {
     id: number;
     title: string;
     detail: string;
-    assgnee: string;
+    assignee: string;
     createdby: string;
-    deadline: Date;
+    deadline: string;
 }

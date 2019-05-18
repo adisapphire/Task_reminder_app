@@ -1,3 +1,40 @@
-
-
+<!-- <app-register></app-register> -->
+<!-- <app-task></app-task> -->
+<!-- <app-login></app-login> -->
+<!-- <app-task-detail></app-task-detail> -->
+<!-- <app-profile></app-profile> -->
+<!-- <app-filter></app-filter> -->
+<nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" routerLink="/dashboard">Task Reminder</a>
+        <ul class="nav nav-pills">
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell"></i></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#one">one</a>
+              <a class="dropdown-item" href="#two">two</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#three">three</a>
+            </div>
+          </li>
+          <li class="nav-item">
+                <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link" routerLink="/register">SignUp</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link" href="#mdo">Logout</a>
+        </li>
+        </ul>
+        
+      </nav>
 <router-outlet></router-outlet>
+<footer>
+    <div class="footer d-flex justify-content-center">
+            <i class="fa fa-address-book" aria-hidden="true"></i>
+            <i class="fa fa-address-book" aria-hidden="true"></i>
+
+    </div>
+    
+</footer>
