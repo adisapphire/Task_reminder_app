@@ -1,3 +1,14 @@
-<p>
-  dashboard works!
-</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="row">
+        <h3 class="d-flex justify-content-center col-lg-4">Tasks</h3>
+          <button mat-raised-button (click)="openDialog()" class="btn btn-light"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <div class="col-lg-2"><a mat-button (click)="openDialog()"></a>
+        </div>
+        <app-filter class="col-lg-4"></app-filter>
+    </div>
+      
+    <app-task></app-task>
+    <app-task></app-task>
+    <app-task></app-task>
+    <app-task></app-task>
+</div>

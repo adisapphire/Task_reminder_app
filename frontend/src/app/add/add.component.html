@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Create New Task</h1>
+<div mat-dialog-content>
+  <p>Title</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.title">
+  </mat-form-field>
+  <p>Assign the task</p>
+<mat-form-field>
+  <mat-label>Assignee</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let user of users" [value]="food.value">
+      {{user.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+  <p>Details</p>
+  <mat-form-field>
+    <textarea matInput placeholder="Body"></textarea>
+  </mat-form-field>
+  <p>Deadline</p>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="mr-2 btn btn-light">cancel</button>
+  <button mat-button [mat-dialog-close]="data.title" cdkFocusInitial class="btn btn-light">create</button>
+</div>
+
