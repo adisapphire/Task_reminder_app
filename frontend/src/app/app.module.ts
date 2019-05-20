@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { FilterComponent } from './filter/filter.component';
 import { AddComponent } from './add/add.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    HttpClientModule,
     
   ],
   providers: [],

@@ -1,11 +1,12 @@
 
-<div class="container">
+<div class="container" *ngIf="task">
     <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-3 ml-4">Title</h1>
-    <p class="lead ml-5">Created by</p>
-    <p class="text-right mr-5">Assignee</p>
+    <h1 class="display-3 ml-4">{{task.title}}</h1>
+    <p class="lead ml-5">{{task.created_by}}</p>
+    <p class="text-right mr-5">{{task.assignee}}</p>
     <hr class="my-2">
-    <p class="ml-5">Body</p>
+    <p class="ml-5">{{task.deadline | date:'full'}}</p>
+    <p class="ml-5">{{task.detail}}</p>
 
     </div>
 </div>
