@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'user',
     'corsheaders',
+    'register',
+
 ]
 
 MIDDLEWARE = [
@@ -81,6 +83,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'api.wsgi.application'
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
+}
 
 
 # Database
