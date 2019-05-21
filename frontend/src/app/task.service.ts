@@ -5,12 +5,16 @@ import { Task } from './models/task';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
+
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
-
-
-
 
 export class TaskService {
   private tasksUrl = 'http://127.0.0.1:8000/api/tasks/'; 
@@ -20,7 +24,7 @@ export class TaskService {
   getTasks (): Observable<Task[]> {
     return this.http.get<Task[]>(this.tasksUrl,)
       .pipe(
-        tap(_ => console.log('fetched tasks')),
+        tap(_ => console.log('fetched task')),
         catchError(this.handleError<Task[]>('getTasks', []))
       );
   }
@@ -30,6 +34,13 @@ export class TaskService {
     return this.http.get<Task>(url).pipe(
       tap(_ => console.log(`fetched task id=${id}`)),
       catchError(this.handleError<Task>(`getTask id=${id}`))
+    );
+  }
+
+  addTask (task: Task): Observable<Task> {
+    return this.http.post<Task>(this.tasksUrl, task, httpOptions).pipe(
+      tap((newTask: Task) => console.log(`added task w/ id=${newTask.id}`)),
+      catchError(this.handleError<Task>('addTask'))
     );
   }
 
