@@ -25,11 +25,13 @@ export class AuthenticationService {
     login(username: string, password: string) {
         return this.http.post<any>(`${this.authUrl}`, { username, password })
             .pipe(map(user => {
-                console.log(user);
+                // console.log(user);
                 // login successful if there's a jwt token in the response
                 if (user && user.refresh && user.access) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+  
                     this.currentUserSubject.next(user);
                 }
 
@@ -37,9 +39,28 @@ export class AuthenticationService {
             }));
     }
 
+    refreshToken() : Observable<any> {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let token = currentUser.refresh;
+     
+        return this.http.post<any>("http://localhost:8000/api/token/refresh/", { 'refresh': token })
+          .pipe(
+            map(user => {
+     
+              if (user && user.access) {
+                  let access = user.access;
+                localStorage.setItem('currentUser', JSON.stringify({refresh:token,access}));
+              }
+     
+              return user;
+          }));
+      }
+
     logout() {
         // remove user from local storage to log user out
+        
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
 }
