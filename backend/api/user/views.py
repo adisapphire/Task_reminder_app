@@ -3,10 +3,16 @@ from rest_framework.response import Response
 from rest_framework import generics
 # Create your views here.
 from .models import Task
-from .serializers import Taskserializer
+from .serializers import Taskserializer, TaskDserializer
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+
+# class TaskDView(generics.ListAPIView):
+#     queryset  = Task.objects.all()
+#     serializer_class = TaskDserializer
 
 class TaskView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset  = Task.objects.all()
     serializer_class = Taskserializer
 
@@ -18,6 +24,7 @@ class TaskView(generics.ListAPIView):
         return Response({"success": "Task '{}' created successfully".format(task_saved.title)})
 
 class TaskDetailView(generics.RetrieveUpdateAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset  = Task.objects.all()
     serializer_class = Taskserializer
 

@@ -5,6 +5,6 @@ export class User {
     Email: string;
     password: string;
     refresh?: string;
-    token?: string;
+    access?: string;
     
 }

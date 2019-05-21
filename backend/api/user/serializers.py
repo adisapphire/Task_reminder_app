@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Task
-
+from register.serializers import UserSerializer
 
 class Taskserializer(serializers.ModelSerializer):
     class Meta:
@@ -10,9 +10,9 @@ class Taskserializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Task.objects.create(**validated_data)
 
-# class Taskserializer(serializers.ModelSerializer):
-#     class Meta:
-#         fields = ('id','title','assignee')
-#         model = Task
+class TaskDserializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id','title','assign_to')
+        model = Task
 
 
