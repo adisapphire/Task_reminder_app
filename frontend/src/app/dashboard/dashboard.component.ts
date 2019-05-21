@@ -7,7 +7,6 @@ import { UserService } from '../user.service';
 import { Users } from '../models/users';
 
 export interface DialogData {
-  animal: string;
   name: string;
 }
 
