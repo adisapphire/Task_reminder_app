@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.add(result);
-      this.getTasks();
+      // this.getTasks();
     });
   }
 
@@ -51,7 +51,8 @@ export class DashboardComponent implements OnInit {
     if (!task) { return; }
     this.taskService.addTask(task)
       .subscribe(task => {
-        this.tasks.push(task);
+        // this.tasks.push(task);
+        this.getTasks();
       });
   }
 
