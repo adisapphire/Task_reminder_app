@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "backend/bin/python3.6",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.linting.flake8Enabled": false
-}
