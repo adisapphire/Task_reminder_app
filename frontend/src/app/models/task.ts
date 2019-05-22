@@ -5,4 +5,5 @@ export class Task {
     deadline: string;
     assignee: string;
     createdby: string;
+    assign_to: string;
 }

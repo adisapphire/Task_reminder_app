@@ -1,38 +1,74 @@
 <div class="jumbotron jumbotron-fluid d-flex justify-content-center">
     <div class="card" style="width: 36rem;">
-      <div class="card-body">
-        <h4 class="card-title text-center">Register</h4>
-        <form>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" placeholder="Enter Your Name" required>
+      <div class="card-body" [hidden]="submitted">
+        <h4 class="card-title text-center">SignUp</h4>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        <form (ngLogin)="onSignup()" #signupForm="ngForm" [mustMatch]="['password', 'confirm_password']">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control"
+             [(ngModel)]="model.first_name" name="first_name" id="first_name" placeholder="first_name" required #first_name="ngModel">
+            <div [hidden]="first_name.valid || first_name.pristine"
+                         class="alert alert-danger">
+                         first_name is required
             </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" placeholder="Enter Your Email" required>
-            </div>
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" placeholder="username" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" placeholder="password" required>
-                <small class="form-text text-muted">At least 8 letters</small>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" class="form-control"
+           [(ngModel)]="model.last_name" name="last_name" id="last_name" placeholder="last_name" required #last_name="ngModel">
+          <div [hidden]="last_name.valid || last_name.pristine"
+                       class="alert alert-danger">
+                       last_name is required
+          </div>
+      </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" [(ngModel)]="model.email" #email="ngModel" required email />
+          <div [hidden]="email.valid || email.pristine"
+                         class="alert alert-danger">
+                         Enter valid email
+          <!-- <div [hidden]="email.errors.email" class="alert alert-danger">Email must be a valid email address</div> -->
+            </div>   
+          </div>
+    
 
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control"
+             [(ngModel)]="model.username" name="username" id="username" placeholder="username" required #username="ngModel">
+            <div [hidden]="username.valid || username.pristine"
+                         class="alert alert-danger">
+                      username is required
             </div>
-            <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" class="form-control" placeholder="confirm password" required>
-            </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required minlength="8" />
+            <div [hidden]="password.valid || password.pristine"
+                      class="alert alert-danger">
+                     enter Password which must be at least 8 characters
+          </div>
+<!-- <div [hidden]="password.errors.minlength" class="alert alert-danger"></div> -->
+      </div>
+      <div class="form-group">
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" class="form-control" name="confirm_password" [(ngModel)]="model.confirm_password" #confirm_password="ngModel" required minlength="8" />
+          <div [hidden]="confirm_password.valid || confirm_password.pristine || confirm_password.errors.mustMatch"
+                    class="alert alert-danger">
+                password must match
+        </div>
+            
+    </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" required>
                 <label class="form-check-label">Terms and conditions</label>
               </div>
               <div class="text-center">
-            <button type="submit" class="btn btn-primary">SignUp</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!signupForm.form.valid" (click)="signup()">SignUp</button>
               </div>
         </form>
       </div>
+
     </div>
 </div>

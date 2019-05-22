@@ -17,12 +17,13 @@ const httpOptions = {
 })
 
 export class TaskService {
-  private tasksUrl = 'http://127.0.0.1:8000/api/tasks/'; 
+  private tasksUrl = 'http://127.0.0.1:8000/api/tasks/';
+  private showtask = 'http://127.0.0.1:8000/api/tasks/show';
 
   constructor(private http: HttpClient) { }
 
   getTasks (): Observable<Task[]> {
-    return this.http.get<Task[]>(this.tasksUrl,)
+    return this.http.get<Task[]>(this.showtask,)
       .pipe(
         tap(_ => console.log('fetched task')),
         catchError(this.handleError<Task[]>('getTasks', []))
@@ -41,6 +42,18 @@ export class TaskService {
     return this.http.post<Task>(this.tasksUrl, task, httpOptions).pipe(
       tap((newTask: Task) => console.log(`added task w/ id=${newTask.id}`)),
       catchError(this.handleError<Task>('addTask'))
+    );
+  }
+
+
+  searchTasks(term: string): Observable<Task[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Task[]>(`${this.tasksUrl}/?search=${term}`).pipe(
+      tap(_ => console.log(`found tasks matching "${term}"`)),
+      catchError(this.handleError<Task[]>('searchTasks', []))
     );
   }
 

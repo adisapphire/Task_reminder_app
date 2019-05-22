@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+from datetime import timedelta
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     'user',
     'corsheaders',
     'register',
+    'ws4redis',
+    'notification',
     'django_filters'
 
 ]
@@ -59,12 +63,24 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
+#CORS
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
 ]
+
+# CELERY STUFF
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+}
 
 ROOT_URLCONF = 'api.urls'
 
@@ -146,3 +162,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# WEBSOCKET_URL = '/ws/'
+
+# WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
+# SESSION_ENGINE = 'redis_sessions.session'
+
+# WS4REDIS_EXPIRE = 100
+
+# SESSION_REDIS_PREFIX = 'session'

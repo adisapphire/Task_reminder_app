@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { MustMatchDirective } from './helpers/must-match.directive';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     TaskDetailComponent,
     ProfileComponent,
     FilterComponent,
-    AddComponent
+    AddComponent,
+    MustMatchDirective
   ],
   imports: [
     BrowserModule,
