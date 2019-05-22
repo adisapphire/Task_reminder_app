@@ -2,13 +2,23 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Users } from './models/users';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from './models/user';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class UserService {
   private usersUrl = 'http://127.0.0.1:8000/api/users/';
+  private regUrl = 'http://127.0.0.1:8000/api/users/add';
 
   constructor(private http: HttpClient) { }
 
@@ -18,6 +28,15 @@ export class UserService {
         tap(_ => console.log('fetched Users')),
         catchError(this.handleError<Users[]>('getUsers', []))
       );
+  }
+
+
+  addUser (user: User): Observable<User> {
+    console.log("yup",user);
+    return this.http.post<User>(this.regUrl, user, httpOptions).pipe(
+      tap((newUser: User) => console.log(`added user w/ id=${newUser.id}`)),
+      catchError(this.handleError<User>('addUser'))
+    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

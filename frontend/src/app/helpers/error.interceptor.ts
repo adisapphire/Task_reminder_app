@@ -47,44 +47,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         return request.clone({ setHeaders: { Authorization: `Bearer ${token}`}});
       }
 
-    // private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
- 
-    //     if(!this.isRefreshingToken) {
-    //       this.isRefreshingToken = true;
-     
-    //       // Reset here so that the following requests wait until the token
-    //       // comes back from the refreshToken call.
-    //       this.tokenSubject.next(null);
-     
-    //       return this.authenticationService.refreshToken()
-    //         .pipe(
-    //           map(user => {
-    //             if(user) {
-    //               this.tokenSubject.next(user.access);
-    //               localStorage.setItem('currentUser', JSON.stringify(user));
-    //               return next.handle(this.addTokenToRequest(request, user.access));
-    //             }
-     
-    //             return this.authenticationService.logout();
-    //           }),
-    //           catchError(err => {
-    //             return <any>this.authenticationService.logout();
-    //           }),
-    //           finalize(() => {
-    //             this.isRefreshingToken = false;
-    //           })
-    //         );
-    //     } else {
-    //       this.isRefreshingToken = false;
-     
-    //       return this.tokenSubject
-    //         .pipe(filter(token => token != null),
-    //           take(1),
-    //           switchMap(token => {
-    //           return next.handle(this.addTokenToRequest(request, token));
-    //         }));
-    //     }
-    //   }
     }
 
     

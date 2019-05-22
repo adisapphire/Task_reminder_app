@@ -10,18 +10,20 @@ class Task(models.Model):
     deadline = models.DateTimeField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,blank=True, on_delete=models.CASCADE)
     assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assignee')
+    
+    def create_by(self):
+        if self.created_by:
+            return self.created_by.username
+        return None
 
     def assign_to(self):
         return self.assignee.username
-    
-    # def create_by(self):
-    #     if self.created_by:
-    #         return self.created_by.username
-    #     return None
 
 
     def __str__(self):
         return self.title
+
+
 
 
 

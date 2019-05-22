@@ -23,10 +23,10 @@ export class DashboardComponent implements OnInit {
   users: Users[];
 
   constructor(private taskService: TaskService, public dialog: MatDialog) {}
-
+  
   getTasks(): void {
     this.taskService.getTasks()
-    .subscribe(tasks => this.tasks = tasks);
+    .subscribe(tasks =>this.tasks = tasks);
   }
   
 

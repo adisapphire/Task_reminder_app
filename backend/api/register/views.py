@@ -23,7 +23,7 @@ class UserView(generics.ListAPIView):
 
     def post(self,request):
         serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             if user:
                 return Response(serializer.data, status = status.HTTP_201_CREATED)

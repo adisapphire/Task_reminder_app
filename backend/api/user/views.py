@@ -6,10 +6,12 @@ from .models import Task
 from .serializers import Taskserializer, TaskDserializer
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from notification.task import create_notification
 
-# class TaskDView(generics.ListAPIView):
-#     queryset  = Task.objects.all()
-#     serializer_class = TaskDserializer
+class TaskDView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset  = Task.objects.all()
+    serializer_class = TaskDserializer
 
 class TaskView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
@@ -21,7 +23,8 @@ class TaskView(generics.ListAPIView):
         serializer = Taskserializer(data=task)
         if serializer.is_valid(raise_exception=True):
             task_saved = serializer.save()
-        return Response({"success": "Task '{}' created successfully".format(task_saved.title)})
+            create_notification.apply_async(args=[task_saved.title], eta=task['deadline'])
+            return Response({"success": "Task '{}' created successfully".format(task_saved.title)})
 
 class TaskDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)

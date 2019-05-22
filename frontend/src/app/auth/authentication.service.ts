@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
 
@@ -38,6 +38,8 @@ export class AuthenticationService {
                 return user;
             }));
     }
+
+    
 
     refreshToken() : Observable<any> {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
