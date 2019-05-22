@@ -5,10 +5,21 @@ from rest_framework import generics
 from .models import Task
 from .serializers import Taskserializer
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
+from . import models
+from rest_framework import filters
+#from django_filters.rest_framework import DjangoFilterBackend as filters
+from rest_framework import generics
+
+#from django_filters.rest_framework import DjangoFilterBackend
 
 class TaskView(generics.ListAPIView):
-    queryset  = Task.objects.all()
+    #permission_classes = (IsAuthenticated,)
+    queryset = Task.objects.all()
     serializer_class = Taskserializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('assignee__username',)
 
     def post(self, request):
         task = request.data
@@ -19,7 +30,7 @@ class TaskView(generics.ListAPIView):
 
 class TaskDetailView(generics.RetrieveUpdateAPIView):
     queryset  = Task.objects.all()
-    serializer_class = Taskserializer
+    serializer_class = Taskserializer 
 
     def delete(self, request, pk):
         # Get object with this pk
