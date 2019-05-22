@@ -7,11 +7,15 @@ from .serializers import Taskserializer, TaskDserializer
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from notification.task import create_notification
+from rest_framework import filters
+
 
 class TaskDView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
     queryset  = Task.objects.all()
     serializer_class = TaskDserializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('assign_to',)
 
 class TaskView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
@@ -29,7 +33,7 @@ class TaskView(generics.ListAPIView):
 class TaskDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset  = Task.objects.all()
-    serializer_class = Taskserializer
+    serializer_class = Taskserializer 
 
     def delete(self, request, pk):
         # Get object with this pk
