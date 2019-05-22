@@ -1,6 +1,6 @@
 .vscode/
-backend/bin/
-backend/include/
-backend/lib/python3.6
-backend/share/python-wheels/
+backend/bin
+backend/include
+backend/lib
+backend/share/python-wheels
 backend/api/db.sqlite3
