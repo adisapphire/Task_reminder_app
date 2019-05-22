@@ -2,12 +2,18 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UsersSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
+class UsersView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = User.objects.all()
+    serializer_class = UsersSerializer
+
 
 class UserView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -25,5 +31,6 @@ class UserView(generics.ListAPIView):
 
         
 class UserApiView(generics.RetrieveUpdateAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer

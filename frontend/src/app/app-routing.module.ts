@@ -5,13 +5,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
 { path: 'register', component: RegisterComponent },
 { path: 'login', component: LoginComponent },
-{ path: 'dashboard', component: DashboardComponent },
-{ path: 'task/:id', component: TaskDetailComponent },
+{ path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
+{ path: 'task/:id', component: TaskDetailComponent,canActivate: [AuthGuard] },
 { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 

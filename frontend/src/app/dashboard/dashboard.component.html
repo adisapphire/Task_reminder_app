@@ -6,9 +6,9 @@
         </div>
         <app-filter class="col-lg-4"></app-filter>
     </div>
-      
-    <app-task></app-task>
-    <app-task></app-task>
-    <app-task></app-task>
-    <app-task></app-task>
-</div>
+    <ng-container *ngFor = "let task of tasks index as i; trackBy: trackByFn">
+      <a routerLink="/task/{{task.id}}">
+    <app-task  [task] = "task"></app-task>
+  </a>
+</ng-container>
+  </div>
