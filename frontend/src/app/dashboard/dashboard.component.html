@@ -1,10 +1,19 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="row">
         <h3 class="d-flex justify-content-center col-lg-4">Tasks</h3>
-          <button mat-raised-button (click)="openDialog()" class="btn btn-light"><i class="fa fa-plus" aria-hidden="true"></i></button>
-          <div class="col-lg-2"><a mat-button (click)="openDialog()"></a>
-        </div>
-        <app-filter class="col-lg-4"></app-filter>
+          
+        <app-filter class="col-lg-6"></app-filter>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <button mat-raised-button (click)="openDialog()" class="btn btn-light col-lg-2">Create Task&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button>
+
+
+    </div>
+    
+    <h2 class="ml-5">All Assigned Tasks</h2>
+    <div class="row">
+      <div class="col ml-5 text-left">Title</div>
+      <div class="col mr-5 text-right">Assignee</div>
     </div>
     <ng-container *ngFor = "let task of tasks index as i; trackBy: trackByFn">
       <a routerLink="/task/{{task.id}}">

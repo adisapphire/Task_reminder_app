@@ -17,8 +17,8 @@ const httpOptions = {
 
 
 export class UserService {
-  private usersUrl = 'http://127.0.0.1:8000/api/users/';
-  private regUrl = 'http://127.0.0.1:8000/api/users/add';
+  private usersUrl = 'http://192.168.1.136:8000/api/users/';
+  private regUrl = 'http://192.168.1.136:8000/api/users/add';
 
   constructor(private http: HttpClient) { }
 

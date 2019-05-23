@@ -11,8 +11,8 @@ import { User } from '../models/user';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private authUrl = 'http://127.0.0.1:8000/api/token/';
-
+    private authUrl = 'http://192.168.1.136:8000/api/token/';
+    // 'http://127.0.0.1:8000/api/token/';
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -45,7 +45,7 @@ export class AuthenticationService {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         let token = currentUser.refresh;
      
-        return this.http.post<any>("http://localhost:8000/api/token/refresh/", { 'refresh': token })
+        return this.http.post<any>("http://192.168.1.136:8000/api/token/refresh/", { 'refresh': token })
           .pipe(
             map(user => {
      

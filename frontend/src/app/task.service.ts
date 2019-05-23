@@ -17,8 +17,8 @@ const httpOptions = {
 })
 
 export class TaskService {
-  private tasksUrl = 'http://127.0.0.1:8000/api/tasks/';
-  private showtask = 'http://127.0.0.1:8000/api/tasks/show';
+  private tasksUrl = 'http://192.168.1.136:8000/api/tasks/';
+  private showtask = 'http://192.168.1.136:8000/api/tasks/show';
 
   constructor(private http: HttpClient) { }
 
@@ -51,7 +51,7 @@ export class TaskService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Task[]>(`${this.tasksUrl}/?search=${term}`).pipe(
+    return this.http.get<Task[]>(`${this.showtask}?search=${term}`).pipe(
       tap(_ => console.log(`found tasks matching "${term}"`)),
       catchError(this.handleError<Task[]>('searchTasks', []))
     );
