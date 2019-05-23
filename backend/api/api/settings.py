@@ -79,7 +79,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Kolkata'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
 }
 
 ROOT_URLCONF = 'api.urls'
@@ -164,9 +164,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-# WEBSOCKET_URL = '/ws/'
+WEBSOCKET_URL = '/ws/'
 
-# WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+WSGI_APPLICATION = 'ws4redis.django_runserver.application'
 
 # SESSION_ENGINE = 'redis_sessions.session'
 
