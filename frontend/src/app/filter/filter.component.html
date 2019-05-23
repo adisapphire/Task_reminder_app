@@ -1,4 +1,11 @@
-<form class="form-inline">
-  <input class="form-control mr-sm-2" type="search" placeholder="Assignee name" aria-label="Search">
-  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Filter</button>
-</form>
+<div id="search-component"> 
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="search assignee" />
+ 
+  <ul class="search-result">
+    <ng-container *ngFor = "let task of tasks$ | async index as i; trackBy: trackByFn">
+      <a routerLink="/task/{{task.id}}">
+    <app-task  [task] = "task"></app-task>
+    </a>
+    </ng-container>
+  </ul>
+</div>

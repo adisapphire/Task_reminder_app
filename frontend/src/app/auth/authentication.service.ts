@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
+import {Urlsettings} from '../urlsettings';
 
 @Injectable({ providedIn: 'root' })
 
@@ -11,8 +12,10 @@ import { User } from '../models/user';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private authUrl = 'http://127.0.0.1:8000/api/token/';
-
+    private authUrl = Urlsettings.LOCALHOST+Urlsettings.AuthURL;
+    private refreshurl = this.authUrl+Urlsettings.AUTHREFRESHURL;
+    
+    
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -44,8 +47,8 @@ export class AuthenticationService {
     refreshToken() : Observable<any> {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         let token = currentUser.refresh;
-     
-        return this.http.post<any>("http://localhost:8000/api/token/refresh/", { 'refresh': token })
+        
+        return this.http.post<any>(`${this.refreshurl}`, { 'refresh': token })
           .pipe(
             map(user => {
      

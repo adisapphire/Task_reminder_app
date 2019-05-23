@@ -27,7 +27,7 @@ SECRET_KEY = '&b6f8f_02v$cuaa64+eosf2smng3i9(476!*coraa))wwv0$i1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.20.87']
 
 
 
@@ -164,9 +164,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-# WEBSOCKET_URL = '/ws/'
+WEBSOCKET_URL = '/ws/'
 
-# WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+WSGI_APPLICATION = 'ws4redis.django_runserver.application'
 
 # SESSION_ENGINE = 'redis_sessions.session'
 

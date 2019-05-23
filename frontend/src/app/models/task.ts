@@ -4,6 +4,6 @@ export class Task {
     detail: string;
     deadline: string;
     assignee: string;
-    createdby: string;
+    created_by: number;
     assign_to: string;
 }

@@ -3,11 +3,10 @@ import { AddComponent } from '../add/add.component';
 import { MatDialog } from '@angular/material';
 import { TaskService } from '../task.service';
 import { Task } from '../models/task';
-import { UserService } from '../user.service';
 import { Users } from '../models/users';
 
 export interface DialogData {
-  name: string;
+  created_by: string;
 }
 
 
@@ -38,6 +37,7 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      
       this.add(result);
       // this.getTasks();
     });
@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getTasks();
+    
   }
 
   add(task: Task): void {
