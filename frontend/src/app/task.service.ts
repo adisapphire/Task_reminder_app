@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Task } from './models/task';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Urlsettings } from './urlsettings';
 
 
 
@@ -17,8 +18,8 @@ const httpOptions = {
 })
 
 export class TaskService {
-  private tasksUrl = 'http://192.168.1.136:8000/api/tasks/';
-  private showtask = 'http://192.168.1.136:8000/api/tasks/show';
+  private tasksUrl = Urlsettings.LOCALHOST+Urlsettings.TasksUrl;
+  private showtask = this.tasksUrl+Urlsettings.TaskshowUrl;
 
   constructor(private http: HttpClient) { }
 

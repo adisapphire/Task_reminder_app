@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Users } from './models/users';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './models/user';
+import { Urlsettings } from './urlsettings';
 
 
 const httpOptions = {
@@ -17,8 +18,8 @@ const httpOptions = {
 
 
 export class UserService {
-  private usersUrl = 'http://192.168.1.136:8000/api/users/';
-  private regUrl = 'http://192.168.1.136:8000/api/users/add';
+  private usersUrl = Urlsettings.LOCALHOST+Urlsettings.UserUrl;
+  private regUrl = this.usersUrl+Urlsettings.POSTUrl;
 
   constructor(private http: HttpClient) { }
 
