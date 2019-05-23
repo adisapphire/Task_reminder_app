@@ -11,11 +11,11 @@ from rest_framework import filters
 
 
 class TaskDView(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset  = Task.objects.all()
     serializer_class = TaskDserializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('assign_to',)
+    search_fields = ('assignee__username',)
 
 class TaskView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
@@ -27,7 +27,13 @@ class TaskView(generics.ListAPIView):
         serializer = Taskserializer(data=task)
         if serializer.is_valid(raise_exception=True):
             task_saved = serializer.save()
-            create_notification.apply_async(args=[task_saved.title], eta=task['deadline'])
+            task_saved.created_by = request.user
+            task_saved.save()
+            try:
+                print(task_saved.assignee.id)
+                create_notification.apply_async(args=[task_saved.assignee.id,task_saved.title], eta=task['deadline'])
+            except:
+                print("error in celery part") 
             return Response({"success": "Task '{}' created successfully".format(task_saved.title)})
 
 class TaskDetailView(generics.RetrieveUpdateAPIView):
