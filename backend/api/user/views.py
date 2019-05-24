@@ -12,7 +12,7 @@ from rest_framework import filters
 
 class TaskDView(generics.ListAPIView):
     # permission_classes = (IsAuthenticated,)
-    queryset  = Task.objects.all()
+    queryset = Task.objects.all()
     serializer_class = TaskDserializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('assignee__username',)
@@ -38,7 +38,7 @@ class TaskView(generics.ListAPIView):
 
 class TaskDetailView(generics.RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
-    queryset  = Task.objects.all()
+    queryset = Task.objects.all()
     serializer_class = Taskserializer 
 
     def delete(self, request, pk):
